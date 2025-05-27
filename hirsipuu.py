@@ -9,16 +9,14 @@ class Sanatiedosto:
         satunnainen = choice(sanat)
         return satunnainen
     def arvausten_maara():
-        arvaukset = int(input("Anna väärien arvausten maksimi määrä: "))
-        if not arvaukset.isnumeric():
-            print("Anna vain numeroita")
+        arvaukset = input("Anna väärien arvausten maksimi määrä: ")
         return arvaukset
 
 class Pelilogiikka:
-    def __init__(self):
-        self.sana = Sanatiedosto.valitse_sana()
+    def __init__(self, sana):
+        self.sana = sana
         self.arvaukset = set()
-        self.yritykset = Sanatiedosto.arvausten_maara()
+        self.yritykset = 6
         
     def arvaa(self, arvaus):
         arvaus = arvaus.lower()
@@ -29,7 +27,7 @@ class Pelilogiikka:
             if arvaus in self.arvaukset:
                 return "Olet jo arvannut tämän kirjaimen."
             self.arvaukset.add(arvaus)
-            if arvaus in self.sanat:
+            if arvaus in self.sana:
                 return "Kirjain on sanassa"
             else:
                 self.yritykset -=1
@@ -52,9 +50,27 @@ class Pelilogiikka:
         return False, ""
         
 
-class Hirsipuu: #pelin alustus, silmukka, tarkistukset(oikea kirjain-väärä kirjain), voitto/häviötilanteet
-    pass
+class Hirsipuu:
+    def __init__(self):
+        tiedosto = Sanatiedosto()
+        sana = tiedosto.valitse_sana()
+        self.peli = Pelilogiikka(sana)
+    
+    def kaynnista(self):
+        print("Tervetuloa pelaamaan Hirsipuuta!")
+        while True:
+            print("Sana: ", " ".join(self.peli.nykyinen_tila()))
+            print(f"Yrityksiä jäljellä: {self.peli.yritykset}")
+            arvaus = input("Arvaa kirjain tai koko sana: ")
+            palaute = self.peli.arvaa(arvaus)
+            print(palaute)
+
+            loppu, viesti = self.peli.pelin_loppu()
+            if loppu:
+                print(viesti)
+                break
 
 
 # Pelin käynnistys:
-hirsipuu()
+peli = Hirsipuu()
+peli.kaynnista()

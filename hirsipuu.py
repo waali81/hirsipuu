@@ -1,12 +1,10 @@
-def lataa_sanat(tiedoston_nimi): #lataa sanat tiedostosta
+class Sanatiedosto: #lataa sanat tiedostosta
     pass
-    
 
-def arvaa_kirjain(sana, arvaukset): #palauttaa listan jossa näkyy arvatut kirjaimet ja muiden tilalla alaviiva
+class Pelilogiikka: #palauttaa listan jossa näkyy arvatut kirjaimet ja muiden tilalla alaviiva
     pass
-    
 
-def hirsipuu(): #pelin alustus, silmukka, tarkistukset(oikea kirjain-väärä kirjain), voitto/häviötilanteet
+class Hirsipuu: #pelin alustus, silmukka, tarkistukset(oikea kirjain-väärä kirjain), voitto/häviötilanteet
     pass
 
 

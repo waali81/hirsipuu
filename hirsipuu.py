@@ -9,14 +9,16 @@ class Sanatiedosto:
         satunnainen = choice(sanat)
         return satunnainen
     def arvausten_maara():
-        arvaukset = input("Anna väärien arvausten maksimi määrä: ")
+        arvaukset = int(input("Anna väärien arvausten maksimi määrä: "))
+        if not arvaukset.isnumeric():
+            print("Anna vain numeroita")
         return arvaukset
 
 class Pelilogiikka:
-    def __init__(self, sana):
-        self.sana = sana
+    def __init__(self):
+        self.sana = Sanatiedosto.valitse_sana()
         self.arvaukset = set()
-        self.yritykset = 6
+        self.yritykset = Sanatiedosto.arvausten_maara()
         
     def arvaa(self, arvaus):
         arvaus = arvaus.lower()

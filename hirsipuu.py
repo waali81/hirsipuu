@@ -1,5 +1,16 @@
-class Sanatiedosto: #lataa sanat tiedostosta
-    pass
+from random import choice
+class Sanatiedosto: 
+    def valitse_sana():
+        sanat = []
+        with open("sanat.txt") as tiedosto:
+            for sana in tiedosto:
+                sana = sana.replace("\n","")
+                sanat.append(sana)
+        satunnainen = choice(sanat)
+        return satunnainen
+    def arvausten_maara():
+        arvaukset = input("Anna väärien arvausten maksimi määrä: ")
+        return arvaukset
 
 class Pelilogiikka:
     def __init__(self, sana):

@@ -1,22 +1,25 @@
 from random import choice
 class Sanatiedosto: 
-    def valitse_sana():
+    def __init__(self):
+        self.sana = None
+    def valitse_sana(self):
         sanat = []
         with open("sanat.txt") as tiedosto:
             for sana in tiedosto:
                 sana = sana.replace("\n","")
                 sanat.append(sana)
         satunnainen = choice(sanat)
+        self.sana = satunnainen
         return satunnainen
-    def arvausten_maara():
-        arvaukset = input("Anna väärien arvausten maksimi määrä: ")
+    def arvausten_maara(self):
+        arvaukset = len(self.sana)
         return int(arvaukset)
 
 class Pelilogiikka:
     def __init__(self, sana):
         self.sana = sana
         self.arvaukset = set()
-        self.yritykset = Sanatiedosto.arvausten_maara()
+        self.yritykset = Sanatiedosto.arvausten_maara(self)
         
     def arvaa(self, arvaus):
         arvaus = arvaus.lower()
@@ -53,7 +56,7 @@ class Pelilogiikka:
 
 class Hirsipuu:
     def __init__(self):
-        sana = Sanatiedosto.valitse_sana()
+        sana = Sanatiedosto.valitse_sana(self)
         self.peli = Pelilogiikka(sana)
     
     def kaynnista(self):

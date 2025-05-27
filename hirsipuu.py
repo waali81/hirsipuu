@@ -34,6 +34,7 @@ class Pelilogiikka:
                 return "Väärä kirjain"
         else:
             if arvaus == self.sana:
+                self.arvaukset.update(self.sana)
                 return "Oikea sana"
             else:
                 self.yritykset -=1

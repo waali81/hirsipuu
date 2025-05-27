@@ -10,13 +10,13 @@ class Sanatiedosto:
         return satunnainen
     def arvausten_maara():
         arvaukset = input("Anna väärien arvausten maksimi määrä: ")
-        return arvaukset
+        return int(arvaukset)
 
 class Pelilogiikka:
     def __init__(self, sana):
         self.sana = sana
         self.arvaukset = set()
-        self.yritykset = 6
+        self.yritykset = Sanatiedosto.arvausten_maara()
         
     def arvaa(self, arvaus):
         arvaus = arvaus.lower()
@@ -52,8 +52,7 @@ class Pelilogiikka:
 
 class Hirsipuu:
     def __init__(self):
-        tiedosto = Sanatiedosto()
-        sana = tiedosto.valitse_sana()
+        sana = Sanatiedosto.valitse_sana()
         self.peli = Pelilogiikka(sana)
     
     def kaynnista(self):
